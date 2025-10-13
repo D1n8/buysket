@@ -6,9 +6,7 @@ const app = express();
 const PORT = process.env.PORT || 3000;
 
 app.use(json());
-app.use(cors({
-    origin: "http://localhost:5173"
-}))
+app.use(cors())
 
 app.use((req, res, next) => {
   res.setHeader('Content-Type', 'application/json; charset=utf-8');
