@@ -1,8 +1,5 @@
-export interface IProduct{
-    id: number,
-    name: string,
-    price: number
-}
+import type { IProduct } from "../modules";
+
 
 function Product(props: IProduct){
     return (

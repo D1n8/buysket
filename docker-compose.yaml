@@ -16,7 +16,8 @@ services:
       - ./database/init.sql:/docker-entrypoint-initdb.d/init.sql
 
   backend:
-    build: ./backend
+    build:
+      context: ./backend
     container_name: buysket_backend
     command: npm run dev
     ports:
@@ -34,7 +35,8 @@ services:
       - postgres
 
   frontend:
-    build: ./frontend
+    build:
+      context: ./frontend
     container_name: buysket_frontend
     command: npm run dev -- --host
     ports:

@@ -11,7 +11,7 @@ COPY package*.json ./
 RUN npm install
 
 # Копируем исходники в контейнер
-COPY . .
+
 
 # Пробрасываем порт Node.js
 EXPOSE 3000

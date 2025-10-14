@@ -8,9 +8,6 @@ WORKDIR /app
 COPY package*.json ./
 RUN npm install
 
-# Копируем исходники
-COPY . .
-
 # Пробрасываем порт Vite
 EXPOSE 5173
 
