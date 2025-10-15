@@ -25,6 +25,7 @@ services:
     volumes:
       - ./backend:/app
       - /app/node_modules
+      - ./static:/app/static
     environment:
       DB_HOST: postgres
       DB_USER: postgresnew

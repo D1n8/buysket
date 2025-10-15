@@ -4,5 +4,6 @@ export interface IProduct{
     description: string,
     price: number,
     category_id?: number,
-    seller_id?: number
+    seller_id?: number,
+    images: string[]
 }
