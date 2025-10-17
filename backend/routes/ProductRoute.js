@@ -6,6 +6,7 @@ const router = new Router();
 
 router.post('/products', upload.array("images", 3),ProductsController.createProduct);
 router.get('/products', ProductsController.getProducts);
+router.delete('/products/:id', ProductsController.deleteProduct);
 
 
 export default router;

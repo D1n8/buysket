@@ -9,8 +9,8 @@ const PORT = process.env.PORT || 3000;
 
 app.use(express.json());
 
-app.use('/static', express.static(path.join(process.cwd(), 'static')));
 app.use(cors());
+app.use('/static', express.static(path.join(process.cwd(), 'static')));
 
 app.use((req, res, next) => {
     res.setHeader('Content-Type', 'application/json; charset=utf-8');
@@ -26,14 +26,5 @@ app.listen(PORT, () => {
 
 
 
-// app.delete('/products/:id', async (req, res) => {
-//     try {
-//         const result = await pool.query(
-//             `DELETE FROM products WHERE id=($1)`, [q]
-//         )
-//         res.status(201).json(res.rows)
-//     } catch (error) {
-//         res.status(500).json({ error: "Ошибка удаления" })
-//     }
-// })
+
 
