@@ -1,11 +1,21 @@
+import { useState } from "react";
 import { deleteProduct } from "../http/ProductRequests";
 import type { IProduct } from "../modules";
 import { DeclinationRubles } from "../utils/utils";
+import ConfirmModal from "./modals/ConfirmModal";
 const API_URL = import.meta.env.VITE_API_URL;
 
 function Product(props: IProduct){
-    const onDelete = async () => {
-        deleteProduct(API_URL, props.id);
+    const [modalIsOpen, setModalIsOpen] = useState(false);
+
+    const handleSubmitDelete = async (e: React.FormEvent) => {
+        e.preventDefault();
+        try {
+            deleteProduct(API_URL, props.id);
+            setModalIsOpen(false);
+        } catch (error) {
+            console.log(error);
+        }
     }
 
     return (
@@ -24,7 +34,8 @@ function Product(props: IProduct){
                 <p>Изображение не загружено</p>
             )
         }
-        <button onClick={onDelete}>удалить</button>
+        <button onClick={() => setModalIsOpen(true)}>удалить</button>
+        <ConfirmModal question="Вы точно хотите удалить этот товар?" isOpen={modalIsOpen} onClose={() => setModalIsOpen(false)} handleSubmit={(e) => handleSubmitDelete(e)}></ConfirmModal>
     </div>);
 }
 

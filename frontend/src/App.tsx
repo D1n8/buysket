@@ -25,7 +25,7 @@ function App() {
         }
 
         loading();
-    }, []);
+    }, [list]);
 
     const handleAddProduct = async () => {
         const newProduct = await addProduct(API_URL, name, price, description, images);
@@ -51,7 +51,7 @@ function App() {
             <input placeholder="Название" value={name} onChange={(e) => setName(e.target.value)} />
             <input placeholder="Описание" value={description} onChange={(e) => setDescr(e.target.value)} />
             <input type="number" placeholder="Цена" value={price} onChange={(e) => setPrice(Number(e.target.value))} />
-            <input type="file" multiple onChange={handleFileChange} />
+            <input type="file" multiple onChange={handleFileChange} accept=".png, .jpeg, .jpg"/>
             <button onClick={handleAddProduct}>Добавить</button>
         </div>
     );

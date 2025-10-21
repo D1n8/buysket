@@ -30,10 +30,15 @@ export const addProduct = async (API_URL: string, name: string, price: number, d
 };
 
 export const deleteProduct = async (API_URL: string, id: number) => {
-    const res = await fetch(`${API_URL}/api/products/${id}`, 
-        {
-            method: "DELETE"
-        }
-    );
-    return await res.json();
+    try {
+        const res = await fetch(`${API_URL}/api/products/${id}`,
+            {
+                method: "DELETE"
+            }
+        );
+        return await res.json();
+    } catch (error){
+        console.log(error);
+    }
+    
 }
