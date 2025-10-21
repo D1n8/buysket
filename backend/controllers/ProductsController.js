@@ -1,4 +1,6 @@
-import db from '../db.js'
+import db from '../db.js';
+import fs from 'fs';
+import path from 'path';
 
 class ProductController {
     async createProduct(req, res) {
@@ -60,16 +62,32 @@ class ProductController {
 
     async deleteProduct(req, res) {
         const { id } = req.params;
+
         try {
-            await db.query(
-                `DELETE FROM products WHERE id=($1)`, [id]
+            const images = await db.query(
+                `SELECT image_url FROM product_images WHERE product_id = $1`,
+                [id]
             );
-            res.status(201).json({ message: "Успешно удалено" });
+
+            // Удаляем изображения с диска (кроме defaultImg.png)
+            for (const row of images.rows) {
+                const imagePath = path.resolve(`.${row.image_url}`);
+                if (fs.existsSync(imagePath) && !row.image_url.includes('defaultImg.png')) {
+                    fs.unlink(imagePath, err => {
+                        if (err) console.error(`Ошибка удаления файла: ${imagePath}`, err);
+                    });
+                }
+            }
+
+            await db.query(`DELETE FROM product_images WHERE product_id = $1`, [id]);
+            await db.query(`DELETE FROM products WHERE id = $1`, [id]);
+
+            res.status(200).json({ message: "Товар и его изображения успешно удалены" });
         } catch (error) {
-            res.status(500).json({ error: "Ошибка удаления" });
+            console.error(error);
+            res.status(500).json({ error: "Ошибка удаления товара" });
         }
     }
-
 };
 
 export default new ProductController();
