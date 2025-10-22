@@ -1,7 +1,9 @@
 import express from 'express';
 import cors from 'cors';
 import productRouter from './routes/ProductRoute.js';
+import categoryRouter from './routes/CategoryRoute.js'
 import path from 'path';
+import router from './routes/CategoryRoute.js';
 
 const app = express();
 const PORT = process.env.PORT || 3000;
@@ -17,6 +19,7 @@ app.use((req, res, next) => {
 });
 
 app.use('/api', productRouter);
+app.use('/api', categoryRouter)
 
 app.listen(PORT, () => {
     console.log("Server working!");
