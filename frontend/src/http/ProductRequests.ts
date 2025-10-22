@@ -8,7 +8,7 @@ export const fetchProducts = async (API_URL: string) => {
     }
 };
 
-export const addProduct = async (API_URL: string, name: string, price: number, description: string, images: File[]) => {
+export const addProduct = async (API_URL: string, name: string, price: number, description: string, images: File[], category_id?: number) => {
     try {
         const formData = new FormData();
         formData.append("name", name);
@@ -17,6 +17,8 @@ export const addProduct = async (API_URL: string, name: string, price: number, d
         images.forEach(img => {
             formData.append("images", img)
         });
+
+        if (category_id) formData.append("category_id", category_id.toString());
 
         const res = await fetch(`${API_URL}/api/products`, {
             method: "POST",

@@ -7,3 +7,9 @@ export interface IProduct{
     seller_id?: number,
     images: string[]
 }
+
+export interface ICategory{
+    id: number,
+    name: string,
+    parent_id: number
+}

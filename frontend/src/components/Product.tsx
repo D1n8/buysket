@@ -23,6 +23,7 @@ function Product(props: IProduct){
         <p><b>{props.name}</b></p>
         <p>{props.description}</p>
         <p>{props.price} {DeclinationRubles(props.price)}</p>
+        <p>{props.category_id}</p>
         {
             props.images && props.images.length > 0 ? (
                 props.images.map(image => 
